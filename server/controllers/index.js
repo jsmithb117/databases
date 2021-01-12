@@ -8,7 +8,10 @@ module.exports = {
 
   users: {
     // Ditto as above
-    get: function (req, res) {},
+    get: function (req, res) {
+      console.log('/users get');
+      console.log(req);
+    },
     post: function (req, res) {}
   }
 };

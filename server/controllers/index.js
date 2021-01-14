@@ -1,4 +1,5 @@
 var models = require('../models');
+var db = require('../db');
 
 module.exports = {
   messages: {
@@ -8,10 +9,14 @@ module.exports = {
       res.send('get messages');
     }, // a function which handles a get request for all messages
     post: function (req, res) {
-      console.log('controller post messages');
-      // console.log(res);
+      console.log('controller.messages.post()');
       console.log (req.body);
-      res.send('post messages');
+      var now = Date.now();
+      db.query(`INSERT INTO messages (message, user, room, created) 
+                VALUES (${req.body.message}, ${req.body.username}, ${req.body.roomname}, ${now});`);
+      var data = req.body;
+      
+      res.send();
     } // a function which handles posting a message to the database
   },
 
@@ -24,8 +29,9 @@ module.exports = {
     },
     post: function (req, res) {
       console.log('controller get users');
-      // console.log(res.json);
-      res.send('post users');
+      db.query(`INSERT INTO users (username) 
+                VALUES (${req.body.username});`);
+      res.send();
     }
   }
 };

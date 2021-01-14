@@ -1,22 +1,22 @@
--- CREATE DATABASE chat;
+CREATE DATABASE IF NOT EXISTS chat;
 
 USE chat;
 
-CREATE TABLE users (
-  ID INT NOT NULL UNIQUE,
+CREATE TABLE IF NOT EXISTS users (
+  ID INT NOT NULL AUTO_INCREMENT,
   username TEXT NOT NULL,
   PRIMARY KEY (ID)
 );
 
-CREATE TABLE rooms (
-  ID INT NOT NULL UNIQUE,
+CREATE TABLE IF NOT EXISTS rooms (
+  ID INT NOT NULL AUTO_INCREMENT,
   roomname TEXT NOT NULL,
   PRIMARY KEY (ID)
 );
 
-CREATE TABLE messages (
+CREATE TABLE IF NOT EXISTS messages (
   /* Describe your table here.*/
-  ID INT NOT NULL UNIQUE,
+  ID INT NOT NULL AUTO_INCREMENT,
   message TEXT NOT NULL,
   user INT NOT NULL,
   room INT NOT NULL, 
@@ -35,3 +35,4 @@ CREATE TABLE messages (
  *    mysql -u root < server/schema.sql
  *  to create the database and the tables.*/
 
+-- mysql -u root < /server/schema.sql

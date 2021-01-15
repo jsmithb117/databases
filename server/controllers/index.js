@@ -1,22 +1,22 @@
 var models = require('../models');
 var db = require('../db');
+const { messages } = require('../models');
 
 module.exports = {
   messages: {
     get: function (req, res) {
       console.log('controller get messages');
-      // console.log(res.json());
-      res.send('get messages');
+      console.log(req.body);
+      models.messages.get( (data) => {
+        console.log ('line 11 controllers/index: ', data);
+        res.send(data);
+      });
     }, // a function which handles a get request for all messages
     post: function (req, res) {
-      console.log('controller.messages.post()');
-      console.log (req.body);
-      var now = Date.now();
-      db.query(`INSERT INTO messages (message, user, room, created) 
-                VALUES (${req.body.message}, ${req.body.username}, ${req.body.roomname}, ${now});`);
-      var data = req.body;
-      
-      res.send();
+      models.messages.post(req.body, () => {
+        res.send();
+      });
+
     } // a function which handles posting a message to the database
   },
 
@@ -28,10 +28,9 @@ module.exports = {
       res.send('get users');
     },
     post: function (req, res) {
-      console.log('controller get users');
-      db.query(`INSERT INTO users (username) 
-                VALUES (${req.body.username});`);
-      res.send();
+      models.users.post(req.body, () => {
+        res.send();
+      });
     }
   }
 };

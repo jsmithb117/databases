@@ -4,13 +4,13 @@ USE chat;
 
 CREATE TABLE IF NOT EXISTS users (
   ID INT NOT NULL AUTO_INCREMENT,
-  username VARCHAR(255) NOT NULL UNIQUE,
+  user VARCHAR(255) NOT NULL UNIQUE,
   PRIMARY KEY (ID)
 );
 
 CREATE TABLE IF NOT EXISTS rooms (
   ID INT NOT NULL AUTO_INCREMENT,
-  roomname VARCHAR(255) NOT NULL UNIQUE,
+  room VARCHAR(255) NOT NULL UNIQUE,
   PRIMARY KEY (ID)
 );
 
@@ -18,12 +18,12 @@ CREATE TABLE IF NOT EXISTS messages (
   /* Describe your table here.*/
   ID INT NOT NULL AUTO_INCREMENT,
   message TEXT NOT NULL,
-  user INT NOT NULL,
-  room INT NOT NULL, 
+  userkey INT NOT NULL,
+  roomkey INT NOT NULL, 
   created TEXT NOT NULL,
   Primary KEY (ID),
-  FOREIGN KEY (user) REFERENCES users(ID),
-  FOREIGN KEY (room) REFERENCES rooms(ID)
+  FOREIGN KEY (userkey) REFERENCES users(ID),
+  FOREIGN KEY (roomkey) REFERENCES rooms(ID)
 );
 
 /* Create other tables and define schemas for them here! */
